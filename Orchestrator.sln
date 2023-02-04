@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orchestrator", "Orchestrator\Orchestrator.csproj", "{9F7FCE53-7D0D-430C-9F30-E9EFADB7C0A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F7FCE53-7D0D-430C-9F30-E9EFADB7C0A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F7FCE53-7D0D-430C-9F30-E9EFADB7C0A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F7FCE53-7D0D-430C-9F30-E9EFADB7C0A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F7FCE53-7D0D-430C-9F30-E9EFADB7C0A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54E50F1D-5661-4D55-803D-466D200511B4}
+	EndGlobalSection
+EndGlobal
