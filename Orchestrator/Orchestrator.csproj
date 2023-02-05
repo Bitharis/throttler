@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TaskScheduler.Core\TaskScheduler.Core.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -2,7 +2,7 @@
 
 namespace ConcurrentObservableQueue
 {
-    public sealed class ConcurrentObservableQueue<T>
+    public sealed class ConcurrentObservableQueue<T> : IConcurrentObservableQueue<T>
     {
         private ConcurrentQueue<T> queue;
 
@@ -51,8 +51,18 @@ namespace ConcurrentObservableQueue
         /// </summary>
         public void Enqueue(T item)
         {
-            queue.Enqueue(item);
-            OnCollectionChanged?.Invoke(this, new CollectionChangedEventArgs(CollectionChangeType.ItemEnqueued));
+            lock (queue)
+            {
+                queue.Enqueue(item);
+                if (queue.Count == 1)
+                {
+                    OnCollectionChanged?.Invoke(this, new CollectionChangedEventArgs(CollectionChangeType.FirstItemEnqueued));
+                }
+                else
+                {
+                    OnCollectionChanged?.Invoke(this, new CollectionChangedEventArgs(CollectionChangeType.ItemEnqueued));
+                }
+            }            
         }
 
         /// <summary>
@@ -82,5 +92,30 @@ namespace ConcurrentObservableQueue
         {
             return queue.TryPeek(out result);
         }
+
+        //
+        // Summary:
+        //     Determines whether a sequence contains a specified element by using the default
+        //     equality comparer.
+        //
+        // Parameters:
+        //   source:
+        //     A sequence in which to locate a value.
+        //
+        //   value:
+        //     The value to locate in the sequence.
+        //
+        // Type parameters:
+        //   TSource:
+        //     The type of the elements of source.
+        //
+        // Returns:
+        //     true if the source sequence contains an element that has the specified value;
+        //     otherwise, false.
+        //
+        // Exceptions:
+        //   T:System.ArgumentNullException:
+        //     source is null.
+        public bool Contains(T item) => queue.Contains(item);
     }
 }

@@ -1,13 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TaskScheduler;
+using TaskScheduler.Core;
 
-namespace TaskScheduler
+namespace Orchestrator
 {
     internal class Program
     {
-        static TaskScheduler orchestrator = new TaskScheduler();
+        static TaskScheduler<bool> scheduler = new TaskScheduler<bool>();
 
         static void Main(string[] args)
         {
+            scheduler.Init(1,1);
+
             var tasks = new List<Task>();
             for (int i = 0; i < 3; i++)
             {
@@ -19,14 +23,15 @@ namespace TaskScheduler
 
         static async Task TestDriveAsync()
         {
-            var session = await orchestrator.StartBackup();
+            var service = new SomeService();
+            var session = await scheduler.ScheduleNewTaskAsync(service.StartLongRunningTaskAsync);
 
             bool gotResult = false;
 
             while(gotResult == false)
             {
-                var result = await orchestrator.GetBackupStatus(session);
-                if (result == null)
+                var result = scheduler.GetTaskStatus(session);
+                if (result.IsCompleted)
                 {
                     await Task.Delay(2000);
                     continue;
@@ -34,7 +39,7 @@ namespace TaskScheduler
                 else
                 {
                     gotResult = true;
-                    Console.WriteLine($"Backup completed. Session: {session}\n\n");
+                    //Console.WriteLine($"Backup completed. Session: {session}\n\n");
                 }
             }
         }

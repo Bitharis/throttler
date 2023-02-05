@@ -8,11 +8,10 @@ namespace TaskScheduler
 {
     internal class SomeService
     {
-        public async Task<Result> StartLongRunningTaskAsync(Guid session)
+        public async Task<bool> StartLongRunningTaskAsync()
         {
-            Console.WriteLine($"Executing task for {session}");
             await Task.Delay(3000);
-            return new Result { Succeeded = true };
+            return true;
         }
     }
 }
