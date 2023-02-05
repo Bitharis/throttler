@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Orchestrator
+namespace TaskScheduler
 {
     internal class Program
     {
-        static OrchestratorService orchestrator = new OrchestratorService();
+        static TaskScheduler orchestrator = new TaskScheduler();
 
         static void Main(string[] args)
         {

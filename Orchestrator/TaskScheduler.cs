@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Orchestrator
+namespace TaskScheduler
 {
-    internal class OrchestratorService
+    internal class TaskScheduler
     {
         private object _lock = new object();
         ConcurrentQueue<Guid> queuedTasks = new ConcurrentQueue<Guid>();
@@ -15,7 +15,7 @@ namespace Orchestrator
         SemaphoreSlim throttler = new SemaphoreSlim(1,1);
         SomeService service;
 
-        public OrchestratorService()
+        public TaskScheduler()
         {
             service = new SomeService();
             ExecuteQueuedTasks();
